@@ -1,0 +1,5 @@
+pip install SQLAlchemy
+pip install pyodbc
+pip install pandas
+pip install flask
+pip3 install flask-login

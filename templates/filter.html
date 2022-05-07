@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+{% block content %}
+<head>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--  <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+
+
+
+
+    <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/static/main.css">
+
+    <title>{% block title %}Filtered{% endblock %}</title>
+
+
+<script src="/static/app_filtered.js"></script>
+</head>
+
+
+<body>
+
+  <div style="display:none;">
+    <img id="Fastballsource"
+         src="/static/icons/red2.png"
+         width="300" height="227">
+  </div>
+  
+  <div style="display:none;">
+    <img id="ChangeUpsource"
+         src="/static/icons/orange.png"
+         width="300" height="227">
+  </div>
+  
+  <div style="display:none;">
+    <img id="CurveBallsource"
+         src="/static/icons/green.png"
+         width="300" height="227">
+  </div>
+  
+  
+
+<div class="Left-Hand-Nav">
+<span class="Hitter-vs-Pitcher-Table-Title">Hitter-vs-Pitcher</span>
+
+    <div class="Hitter-vs-Pitcher-Table">
+        <div class="Hitter-vs-Pitcher-Table-Btn-LeftSection">
+        <span><button id="GoBack" class="btn btn-primary btn-lg resultsbtn">Go Back</button></span>
+        </div>
+
+                <div class="hittervspitchtable">
+        <table class="table hittervspitch table-hover sticky" id="HitvsPitchtable">
+              <thead>
+                <tr class="table-info">
+                    <th scope="col">Index</th>
+                    <th scope="col">Right/Left Handed</th>
+                    <th scope="col">Results</th>
+
+
+                </tr>
+
+              </thead>
+                <tbody id="HitvsPitchtablebody">
+                  {% for row in hand_index_data %}
+
+
+                    <tr id="lineid{{row[0]}}">
+                        <td class="hvprow" data-id="{{row[0]}}" id="{{row[3]}}">{{row[3]}}</td>
+                        <td class="hvprow" data-id="{{row[0]}}" id="{{row[4]}}">{{row[4]}}</td>
+                        <td class="hvprow" data-id="{{row[0]}}" id="{{row[5]}}">{{row[5]}}</td>
+                    </tr>
+
+
+                {% endfor %}
+
+
+        </table>
+            </div>
+
+        </div>
+
+
+
+    <div class="Bat-Results-Table">
+        <span class="Bat-Results-Table-Title">AT-BAT RESULTS TOTALS</span>
+
+        <table class="table" id="atbatresults">
+              <thead>
+                <tr class="table-info">
+                    <th scope="col">Hit</th>
+                    <th scope="col">KL</th>
+                    <th scope="col">Walk</th>
+                    <th scope="col">HBP</th>
+                    <th scope="col">Out</th>
+                    <th scope="col">Total</th>
+                </tr>
+              </thead>
+                <tbody id="atbatresultstable">
+                <tr>
+                    <td id="Hitid">{{total_counts[0]}}</td>
+                    <td id="KLid">{{total_counts[1]}}</td>
+                    <td id="Walkid">{{total_counts[2]}}</td>
+                    <td id="HBPid">{{total_counts[3]}}</td>
+                    <td id="Outid">{{total_counts[4]}}</td>
+                    <td id="Totalid">{{total_counts[5]}}</td>
+
+                </tr>
+
+        </table>
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<div class="section-the-box">
+
+    <canvas id="myCanvas">
+        <script>
+window.addEventListener('load', function() {
+            DEVdrawfromdb({{main_dict | safe }})
+});
+        </script>
+
+<!--<canvas id="myCanvas" >-->
+
+
+</canvas>
+</div>
+
+<div class="section-data-table-filtered">
+
+<table class="table table-hover sticky" id="datableyo">
+  <thead>
+    <tr class="table-info">
+
+        <th scope="col">Ball Index</th>
+        <th scope="col">Ball Type</th>
+        <th scope="col">In/Out</th>
+        <th scope="col">Velocity</th>
+        <th scope="col">Ball/Strike</th>
+        <th scope="col">Pitch Results</th>
+
+    </tr>
+  </thead>
+    <tbody id="datatable">
+
+        {% for x in bat_results_data %}
+            <tr id="yo{{loop.index}}">
+                <td class="pitchrow" id="row0{{loop.index}}">{{x[9]}}</td>
+                <td class="pitchrow" id="row1{{loop.index}}">{{x[2]}}</td>
+                <td class="pitchrow" id="row3{{loop.index}}">{{x[5]}}</td>
+                <td class="pitchrow" id="row4{{loop.index}}">{{x[6]}}</td>
+                <td class="pitchrow" id="row5{{loop.index}}">{{x[7]}}</td>
+                <td class="pitchrow" id="row6{{loop.index}}">{{x[8]}}</td>
+            </tr>
+        {% endfor %}
+
+
+</table>
+
+</div>
+
+
+
+<div class="PlayerHeader">
+    <h3 class="playerinfo" id='gameidheader' data-id="{{game}}">Game: {{game_name[0][0]}}</h3>
+    <h3 class="playerinfo" id='playeridheader' data-id="{{player}}">Player: {{player_name[0]}} {{player_name[1]}}</h3>
+</div>
+
+
+
+
+</body>
+
+
+{% endblock %}
+
+
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+{% block content %}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--  <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+
+
+
+
+    <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/static/main.css">
+
+    <title>{% block title %}Playing{% endblock %}</title>
+
+
+
+
+
+
+
+
+<script src="/static/app.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div style="display:none;">
+  <img id="Fastballsource"
+       src="/static/icons/red2.png"
+       width="300" height="227">
+</div>
+
+<div style="display:none;">
+  <img id="ChangeUpsource"
+       src="/static/icons/orange.png"
+       width="300" height="227">
+</div>
+
+<div style="display:none;">
+  <img id="CurveBallsource"
+       src="/static/icons/green.png"
+       width="300" height="227">
+</div>
+
+
+
+<div class="Left-Hand-Nav">
+<span class="Hitter-vs-Pitcher-Table-Title">Hitter-vs-Pitcher</span>
+
+    <div class="Hitter-vs-Pitcher-Table">
+
+        <span id="HitvsPitch" class="Hitter-vs-Pitcher-Table-Btn"><button class="btn btn-danger">+</button></span>
+        <span id="LeftHandedbtn" class="Hitter-vs-Pitcher-Table-Btn-left"><button class="btn btn-primary">Left</button></span>
+        <span id="RightHandedbtn" class="Hitter-vs-Pitcher-Table-Btn-right"><button class="btn btn-primary">Right</button></span>
+        <div class="Hitter-vs-Pitcher-Table-Btn-LeftSection">
+ <!-- Out Button w/ Dropdown -->
+<div data-id="Hit" class="btn-group">
+  <button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hit<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li class="resultsbtn" id="ldhit"><a>LD Hit</a></li>
+    <li class="resultsbtn" id="gbhit"><a>GB Hit</a></li>
+    <li class="resultsbtn" id="fbhit"><a>FB Hit</a></li>
+    <li class="resultsbtn" id="HR"><a>HR</a></li>
+  </ul>
+</div>
+            <span><button id="Kbutton" class="btn btn-primary resultsbtn">KL</button></span>
+            <span><button id="Walkbutton" class="btn btn-primary resultsbtn">Walk</button></span>
+            <span><button id="HBPbutton" class="btn btn-primary resultsbtn">HBP</button></span>
+<!-- Out Button w/ Dropdown -->
+<div data-id="Out" class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Out<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li class="resultsbtn" id="flyout"><a>Fly Out</a></li>
+    <li class="resultsbtn" id="gbout"><a>GB Out</a></li>
+    <li class="resultsbtn" id="lineout"><a>Line Out</a></li>
+    <li class="resultsbtn" id="popout"><a>Pop Out</a></li>
+  </ul>
+</div>
+        </div>
+        <div class="hittervspitchtable">
+        <table class="table hittervspitch table-hover sticky" id="HitvsPitchtable">
+              <thead>
+                <tr class="table-info">
+                    <th scope="col">Index</th>
+                    <th scope="col">Right/Left Handed</th>
+                    <th scope="col">Results</th>
+                     <th scope="col" style="z-index:1" >
+
+                     <div class="form-check form-switch">
+                              <input  data-id="all" class="form-check-input hoverPointer" type="checkbox" role="switch" id="selectedswitchALL">
+                            </div>
+
+                     </th>
+
+
+                </tr>
+
+              </thead>
+                <tbody id="HitvsPitchtablebody">
+                  {% for row in hand_index_data %}
+
+                    {% if row[0] == introwid %}
+                  <!-- Hello -->
+                    <tr id="selectedlineid{{row[0]}}">
+                        <td style="background-color: #6c68684a; border-radius: 13px 0px 0px 13px;"  class="hvprow" data-id="{{row[0]}}" id="selected{{row[3]}}">{{row[3]}}</td>
+                        <td style="background-color: #6c68684a;"  class="hvprow" data-id="{{row[0]}}" id="selected{{row[4]}}">{{row[4]}}</td>
+                        <td style="background-color: #6c68684a; border-radius: 0px 13px 13px 0px;"  class="hvprow" data-id="{{row[0]}}" id="selectedResults">{{row[5]}}</td>
+                        <td  data-id="{{row[0]}}" id="selectedtoggle">
+                            <div class="form-check form-switch">
+                              <input  data-id="{{row[0]}}" class="form-check-input hoverPointer" type="checkbox" role="switch" id="selectedflexSwitchCheckDefault">
+
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr id="lineid{{row[0]}}">
+                        <td class="hvprow" data-id="{{row[0]}}" id="{{row[3]}}">{{row[3]}}</td>
+                        <td class="hvprow" data-id="{{row[0]}}" id="{{row[4]}}">{{row[4]}}</td>
+                        <td class="hvprow" data-id="{{row[0]}}" id="{{row[5]}}">{{row[5]}}</td>
+                        <td  data-id="{{row[0]}}">
+                            <div class="form-check form-switch">
+                              <input data-id="{{row[0]}}" class="form-check-input hoverPointer" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+
+                            </div>
+                        </td>
+                    </tr>
+
+                {% endif %}
+                {% endfor %}
+
+
+        </table>
+            </div>
+
+    </div>
+
+    <div class="Bat-Results-Table">
+        <span class="Bat-Results-Table-Title">AT-BAT RESULTS TOTALS</span>
+
+        <table class="table" id="atbatresults">
+              <thead>
+                <tr class="table-info">
+                    <th scope="col">Hit</th>
+                    <th scope="col">KL</th>
+                    <th scope="col">Walk</th>
+                    <th scope="col">HBP</th>
+                    <th scope="col">Out</th>
+                    <th scope="col">Total</th>
+                </tr>
+              </thead>
+                <tbody id="atbatresultstable">
+                <tr>
+                    <td id="Hitid">{{total_counts[0]}}</td>
+                    <td id="KLid">{{total_counts[1]}}</td>
+                    <td id="Walkid">{{total_counts[2]}}</td>
+                    <td id="HBPid">{{total_counts[3]}}</td>
+                    <td id="Outid">{{total_counts[4]}}</td>
+                    <td id="Totalid">{{total_counts[5]}}</td>
+
+                </tr>
+
+        </table>
+
+
+    </div>
+
+
+
+</div>
+
+
+<!-- https://stackoverflow.com/questions/52463712/toggling-between-two-buttons-javascript -->
+<div class="Section-Buttons">
+<div class="post-container balltypeclass">
+    <button id="Fastball" class="balltypeclass btn btn-outline-danger">Fastball</button>
+    <button id="Change" class="balltypeclass btn btn-outline-warning">Change Up</button>
+    <button id="Curve" class="balltypeclass btn btn-outline-success">Curve Ball</button>
+
+</div>
+<br>
+<div class="post-container">
+    <button id="SM" class="btn btn-outline-info">SM</button>
+    <button id="Foul" class="btn btn-outline-info">Foul</button>
+    <!-- <button style="float:right;" type="button" class="btn btn-secondary">Filter</button> -->
+    <div style="float:right;" class="btn-group">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+      <li data-id="filterall" class="filterbtn" id="filterall"><a>All</a></li>
+      <li data-id="filterfastball" class="filterbtn" id="filterfastball"><a>Fastball</a></li>
+      <li data-id="filterchangeup" class="filterbtn" id="filterchangeup"><a>Change Up</a></li>
+      <li data-id="filtercurve" class="filterbtn" id="filtercurveball"><a>Curve Ball</a></li>
+  </ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="section-the-box">
+
+    <canvas id="myCanvas" >
+        <script>
+window.addEventListener('load', function() {
+            DEVdrawfromdb({{main_dict | safe }})
+});
+        </script>
+
+<!--<canvas id="myCanvas" >-->
+
+
+</canvas>
+</div>
+
+<div class="section-data-table">
+
+<table class="table table-hover sticky" id="datableyo">
+  <thead>
+    <tr class="table-info">
+        <th scope="col">Ball Index</th>
+        <th scope="col">Ball Type</th>
+        <th scope="col">In/Out</th>
+        <th scope="col">Velocity</th>
+        <th scope="col">Ball/Strike</th>
+        <th scope="col">Pitch Results</th>
+
+    </tr>
+  </thead>
+    <tbody id="datatable">
+
+        {% for x in bat_results_data %}
+            <tr id="yo{{loop.index}}">
+                <td class="pitchrow" id="row0{{loop.index}}">{{x[1]}}</td>
+                <td class="pitchrow" id="row1{{loop.index}}">{{x[2]}}</td>
+                <td class="pitchrow" id="row3{{loop.index}}">{{x[5]}}</td>
+                <td class="pitchrow" id="row4{{loop.index}}">{{x[6]}}</td>
+                <td class="pitchrow" id="row5{{loop.index}}">{{x[7]}}</td>
+                <td class="pitchrow" id="row6{{loop.index}}">{{x[8]}}</td>
+            </tr>
+        {% endfor %}
+
+
+</table>
+
+</div>
+
+<div class="section-video">
+
+    embedded video goes here
+
+</div>
+
+<div class="section-data-chart">
+
+    another data table goes here
+
+</div>
+
+<div class="PlayerHeader">
+
+
+    <h4 class="playerinfo" id='gameidheader' data-id="{{game}}"></span>Game: <span class="headertextblod">{{game_name[0][0]}}</span> </h4>
+    <h4 class="playerinfo" id='playeridheader' data-id="{{player}}">Player: <span class="headertextblod">{{player_name[0]}} {{player_name[1]}}</span></h4>
+    <h4 class="playerinfo" id='rowidheader' data-id="{{rowid}}">HvP Row ID: <span class="headertextblod">{{rowid}}</span> </h4>
+    <button id='EndGameofPlayer' type="button" class="btn btn-danger btn-lg EndButton">End</button>
+    <button id='UndoButton' type="button" class="btn btn-danger btn-lg EndButton">Undo</button>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Velocity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+  <div class="col-sm-10">
+    <input class="form-control form-control-lg" id="vinput" placeholder="Velocity Input">
+  </div>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="SaveV" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div>
+    <p id="lastballstrikecount" data-ball="{{last_ball_strike_count[0]}}" data-strike="{{last_ball_strike_count[1]}}" style="display:None;"></p>
+</div>
+
+
+
+
+</body>
+
+
+{% endblock %}
+
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+
+</html>

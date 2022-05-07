@@ -1,0 +1,94 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+
+
+{% block content %}
+
+
+<script src="/static/creategame.js"></script>
+
+
+
+
+<div class="Test-Header">
+
+
+    <h1 align="center">Schedule a New Game</h1>
+    <form>
+  <div class="mb-3">
+    <label for="GameName" class="form-label">Game Title</label>
+    <input
+            type="text"
+            name="GameName"
+            class="form-control"
+            id="GameName"
+
+    >
+  </div>
+  <div class="mb-3">
+    <label for="WhereLocation" class="form-label">Where</label>
+    <input
+            Name="WhereLocation"
+            type="text"
+            class="form-control"
+            id="WhereLocation">
+  </div>
+
+
+        <div class="mb-3">
+    <label for="DateOption1" class="form-label">Game Date</label>
+    <input
+            Name="DateOption1"
+            type="Date"
+            class="form-control"
+            id="DateOption1">
+  </div>
+
+
+</form>
+<button id="newGame" class="btn btn-primary">Schedule Game</button>
+
+
+
+</div>
+
+<div class="ScheduleList">
+
+<table class="table table-hover" id="datableyo">
+  <thead>
+    <tr class="table-info">
+
+    </tr>
+  </thead>
+  <tbody id="gamestable">
+  {% for row in gamedata %}
+    <tr>
+        <td class="something" data-id="{{row['game_id']}}">
+        <div class="card">
+          <div class="card-header">
+            {{row['game_name']}}
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>{{row['location_setting']}} @ {{row['game_date']}}</p>
+            </blockquote>
+          </div>
+</div>
+
+        </td>
+
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+
+
+
+
+
+
+
+</div>
+
+
+{% endblock %}

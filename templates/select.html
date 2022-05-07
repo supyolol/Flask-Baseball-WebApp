@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block title %}Game{% endblock %}
+
+
+{% block content %}
+
+<script src="/static/createplayerandstats.js"></script>
+
+<div class="Test-Header">
+
+    <h1 id="gameid" data-id="{{gameid}}">{{game_name[0][0]}}</h1>
+
+    <h3>Select Your Player</h3>
+
+
+    <div class="row row-cols-1 row-cols-md-3 g-3 playerCord">
+
+  {% for row in roster_data_by_game %}
+        <div class="col playercordgap">
+    <div class="card" style="width: 18rem;">
+        <!-- "https://drive.google.com/uc?export=download&id=1dsDXNkuV9Z1KdKEIaALbflMC_v7s5p_D"-->
+  <!-- <img src="https://drive.google.com/uc?export=download&id=1I6VAgZjea1cSd0WJv4y7clbfPGWL0K3e" class="card-img-top"> -->
+  <img src="/static/roster_pics/{{row['player_id']}}.jpg" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{row['first_name']}} {{row['last_name']}}</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <button data-id="{{row['player_id']}}" class="playbtn btn btn-danger">Play</button>
+    <button data-id="{{row['player_id']}}" class="btn btn-primary">Velocity Input</button>
+  </div>
+</div>
+            </div>
+{% endfor %}
+  </div>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "base.html" %} {% block title %}Game{% endblock %}
+
+
+{% block content %}
+<head>
+<script src="/static/app.js"></script>
+
+</head>
+
+
+<body>
+
+<div class="Left-Hand-Nav">
+
+    <div class="Hitter-vs-Pitcher-Table">
+        <span class="Hitter-vs-Pitcher-Table-Title">Hitter-vs-Pitcher</span>
+        <span id="HitvsPitch" class="Hitter-vs-Pitcher-Table-Btn"><button>+</button></span>
+        <span id="LeftHandedbtn" class="Hitter-vs-Pitcher-Table-Btn-left"><button>Left</button></span>
+        <span id="RightHandedbtn" class="Hitter-vs-Pitcher-Table-Btn-right"><button>Right</button></span>
+
+
+        <table class="table hittervspitch" id="HitvsPitchtable">
+              <thead>
+                <tr class="table-info">
+                    <th scope="col">Index</th>
+                    <th scope="col">Right/Left Handed</th>
+                </tr>
+              </thead>
+                <tbody id="HitvsPitchtablebody">
+
+
+
+        </table>
+
+    </div>
+
+    <div class="Bat-Results-Table">
+        <span class="Bat-Results-Table-Title">AT-BAT RESULTS TOTALS</span>
+
+        <table class="table" id="atbatresults">
+              <thead>
+                <tr class="table-info">
+                    <th scope="col">Hit</th>
+                    <th scope="col">K</th>
+                    <th scope="col">Walk</th>
+                    <th scope="col">HBP</th>
+                    <th scope="col">C..Out</th>
+                </tr>
+              </thead>
+                <tbody id="atbatresultstable">
+                <tr>
+                    <td id="Hitid">#</td>
+                    <td id="Kid">#</td>
+                    <td id="Walkid">#</td>
+                    <td id="HBPid">#</td>
+                    <td id="COutid">#</td>
+
+                </tr>
+
+        </table>
+
+
+    </div>
+
+
+
+</div>
+
+
+<!-- https://stackoverflow.com/questions/52463712/toggling-between-two-buttons-javascript -->
+<div class="Section-Buttons">
+<div class="post-container">
+    <button id="Fastball">Fastball</button>
+    <button id="Change">Change Up</button>
+    <button id="Curve">Curve Ball</button>
+</div>
+
+<div class="post-container">
+    <button id="Take">Take</button>
+    <button id="SM">SM</button>
+    <button id="Con">Con</button>
+    <button id="Foul">Foul</button>
+</div>
+
+<div class="post-container">
+    <button id="Hitbutton">Hit</button>
+    <button id="Kbutton">K</button>
+    <button id="Walkbutton">Walk</button>
+    <button id="HBPbutton">HBP</button>
+    <button id="COutbutton">Out</button>
+</div>
+
+    </div>
+
+<div class="section-the-box">
+
+    <canvas id="myCanvas">
+
+<!--<canvas id="myCanvas" >-->
+
+
+</canvas>
+</div>
+
+<div class="section-data-table">
+
+<table class="table" id="datableyo">
+  <thead>
+    <tr class="table-info">
+        <th scope="col">Ball Index</th>
+        <th scope="col">Ball Type</th>
+        <th scope="col">In/Out</th>
+        <th scope="col">Velocity</th>
+        <th scope="col">Ball/Strike</th>
+        <th scope="col">Pitch Results</th>
+
+    </tr>
+  </thead>
+    <tbody id="datatable">
+
+</table>
+
+</div>
+
+<div class="section-video">
+
+    embedded video goes here
+
+</div>
+
+<div class="section-data-chart">
+
+    another data table goes here
+
+</div>
+
+
+</body>
+
+{% endblock %}
